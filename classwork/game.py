@@ -18,20 +18,15 @@ def enemy_atacks():
     global pers_armor, enemy_atack, pers_hp
     enemy_atack = random.randint(5, 35)
     print('Enemy deals ', enemy_atack, 'to you')
-    if pers_armor != 0:
-        if pers_armor - enemy_atack < 0:
+    if pers_armor > 0:
+        pers_armor = pers_armor - enemy_atack
+        if pers_armor < 0:
             pers_armor = 0
-        elif pers_armor - enemy_atack > 0:
-            pers_armor = pers_armor - enemy_atack
-        elif pers_armor - enemy_atack == 0:
-            pers_armor = 0
-        else:
-            print('error, try restarting the game')
-    if pers_armor == 0:
+    elif pers_armor <= pers_atk:
         pers_hp = pers_hp - enemy_atack
-        if pers_hp <= 0:
-            print('You lost')
-            sys.exit()
+    if pers_hp == 0:
+        print('You lost')
+        sys.exit()
 def attack_enemy():
     global enemy_hp, enemy_armor, pers_atk
     if enemy_armor > 0:
