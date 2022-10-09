@@ -12,10 +12,11 @@ enemy_max_hp = [100, 200, 300, 400, 500]
 enemy_max_armor = [50, 60, 70, 80]
 enemy_hp = random.choice(enemy_max_hp)
 enemy_armor = random.choice(enemy_max_armor)
-enemy_atack = random.randint(5, 35)
+enemy_atack = 0
 #######
 def enemy_atacks():
     global pers_armor, enemy_atack, pers_hp
+    enemy_atack = random.randint(5, 35)
     print('Enemy deals ', enemy_atack, 'to you')
     if pers_armor != 0:
         if pers_armor - enemy_atack < 0:
@@ -33,13 +34,16 @@ def enemy_atacks():
             sys.exit()
 def attack_enemy():
     global enemy_hp, enemy_armor, pers_atk
-    if enemy_hp - pers_atk > 0:
+    if enemy_armor > 0:
+        enemy_armor = enemy_armor - pers_atk
+        if enemy_armor < 0:
+            enemy_armor = 0
+    elif enemy_armor <= pers_atk:
         enemy_hp = enemy_hp - pers_atk
-    elif enemy_hp - pers_atk <= 0:
-        print('You won!')
+    if enemy_hp == 0:
+        print('You won')
         sys.exit()
-    else:
-        print('Error')
+
 
 def heal():
     global pers_hp, max_pers_hp
