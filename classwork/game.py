@@ -44,7 +44,6 @@ def attack_enemy():
         print('You won')
         sys.exit()
 
-
 def heal():
     global pers_hp, max_pers_hp
     if pers_heal + pers_hp >= 100:
